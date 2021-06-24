@@ -27,9 +27,14 @@ export const globalStyles = StyleSheet.create({
      },
      input: {
           width: '90%',
-          borderWidth: .7,
-          borderBottomWidth: 1,
-          marginBottom: 30
+          height: 40,
+          // borderWidth: .7,
+          // borderBottomWidth: 1,
+          // marginBottom: 30,
+          color: '#fff',
+          textAlign: 'center',
+          backgroundColor: '#2196f3'
+
      },
      body: {
           flexDirection: 'row',
@@ -46,11 +51,10 @@ export const globalStyles = StyleSheet.create({
           justifyContent: 'center',
           margin: 10
      },
-     InputDate: {
+     btnInput: {
           width: '90%',
-          // borderTopWidth: 0,
-          // borderRightWidth: 0,
+          backgroundColor: 'rgba(52, 52, 52, 0.8)',
           borderBottomWidth: 1,
           borderWidth: 0
-     } 
+     }
 })

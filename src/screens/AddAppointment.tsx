@@ -1,24 +1,27 @@
-import axios from 'axios'
 import React, {useState} from 'react'
 import { View, Text, TextInput, Button } from 'react-native'
 import { globalStyles } from '../styles/global'
+import api from '../api/api';
 
 const AddAppointment = ({ route }) => {
      const [nom, setNom] = useState('')
      const [prenom, setPrenom] = useState('')
+     const [email, setEmail] = useState('')
      const [cin, setCin] = useState('')
-     const [dn, setDn] = useState('')
+     const [phone, setPhone] = useState('')
 
-     const { id, hour } = route.params
+     const { hour } = route.params
 
      const onSubmit = () => {
-          axios.post(`http://192.168.43.214:5000/addrdv/${id}`, {
-               nom: nom,
-               prenom: prenom,
-               cin: cin,
-               date_naissance: dn
+          api.post('rendezvous', {
+               lastName: nom,
+               firstName: prenom,
+               email: email,
+               CIN: cin,
+               phone: phone,
+               rdvHour: hour
           })
-          .then(resp => alert(resp.data))
+          .then(resp => alert(resp.data.message))
           .catch((error) => alert(error))
      }
 
@@ -26,26 +29,48 @@ const AddAppointment = ({ route }) => {
           <View style={globalStyles.container}>
                <Text style={globalStyles.titleText}>You choose: {hour}</Text>
 
+               <Text></Text>          
+               
                <TextInput 
                placeholder="Last Name" 
                style={globalStyles.input} 
                onChangeText={(val) => setNom(val)}
                />
+               
+               <Text></Text>          
+               
                <TextInput 
                placeholder="First Name" 
                style={globalStyles.input} 
                onChangeText={(val) => setPrenom(val)}
-               />          
+               />
+               
+               <Text></Text>          
+                         
+               <TextInput 
+               placeholder="Email" 
+               style={globalStyles.input} 
+               onChangeText={(val) => setEmail(val)}
+               />
+               
+               <Text></Text>          
+                         
                <TextInput 
                placeholder="CIN" 
                style={globalStyles.input} 
                onChangeText={(val) => setCin(val)}
-               />          
-               <TextInput 
-               placeholder="Birth Date"
-               style={globalStyles.input} 
-               onChangeText={(val) => setDn(val)}
                />
+
+               <Text></Text>          
+               
+               <TextInput 
+               placeholder="Phone"
+               style={globalStyles.input} 
+               onChangeText={(val) => setPhone(val)}
+               />
+               
+               <Text></Text>          
+               
                <Button title="Add Appointment" onPress={() => { onSubmit() }} />
           </View>
      )
